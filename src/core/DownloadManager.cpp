@@ -282,6 +282,7 @@ bool DownloadManager::download(DownloadJob* job)
     if (!job->file.open(QIODevice::WriteOnly)) {
         emit error(QNetworkReply::ProtocolUnknownError,
                 QString("Could not open target file %1").arg(job->file.fileName()));
+#endif
         return false;
     }
 
