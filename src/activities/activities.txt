@@ -26,6 +26,7 @@ color_mix_light
 colors
 details
 drawnumber
+electric
 enumerate
 erase
 erase_2clic
