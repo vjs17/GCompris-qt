@@ -1,10 +1,11 @@
 /* GCompris - electric.qml
  *
- * Copyright (C) 2015 YOUR NAME <xx@yy.org>
+ * Copyright (C) 2015 Sagar Chand Agarwal <atomsagar@gmail.com>
  *
  * Authors:
- *   <THE GTK VERSION AUTHOR> (GTK+ version)
- *   YOUR NAME <YOUR EMAIL> (Qt Quick port)
+ *   Bruno Coudoin <bruno.coudoin@gcompris.net> (GTK+ version)
+ *   Sagar Chand Agarwal <atomsagar@gmail.com> (Qt Quick Port)
+ *   Pulkit Gupta <pulkitgenius@gmail.com> (Qt Quick - Babymatch.qml )
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -67,7 +68,7 @@ ActivityBase {
 
         GCText {
             anchors.centerIn: parent
-            text: "electric activity"
+            text: "electric"
             fontSize: largeSize
         }
 
