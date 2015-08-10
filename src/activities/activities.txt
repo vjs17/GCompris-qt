@@ -16,10 +16,10 @@ braille_alphabets
 braille_fun
 canal_lock
 chronos
-click_on_letter
-click_on_letter_up
 clickanddraw
 clickgame
+click_on_letter
+click_on_letter_up
 clockgame
 color_mix
 color_mix_light
@@ -91,6 +91,7 @@ readingh
 readingv
 redraw
 redraw_symmetrical
+renewable_energy
 reversecount
 scalesboard
 scalesboard_weight
