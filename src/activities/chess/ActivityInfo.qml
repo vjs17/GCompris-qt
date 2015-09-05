@@ -1,6 +1,6 @@
 /* GCompris - ActivityInfo.qml
  *
- * Copyright (C) 2015 Your Name <yy@zz.org>
+ * Copyright (C) 2015 Bruno Coudoin <bruno.coudoin@gcompris.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,16 +18,17 @@
 import GCompris 1.0
 
 ActivityInfo {
-  name: "chess_partyend/ChessPartyend.qml"
-  difficulty: 2
-  icon: "chess_partyend/chess_partyend.svg"
+  name: "chess/Chess.qml"
+  difficulty: 6
+  icon: "chess/chess.svg"
   author: "Bruno Coudoin &lt;bruno.coudoin@gcompris.net&gt;"
   demo: false
-  title: qsTr("Learning chess")
-  description: qsTr("Play the end of the chess game against the computer")
+  title: qsTr("Play chess against Tux")
+  description: ""
+  //intro: "play chess against Tux"
   goal: ""
-  prerequisite: qsTr("Mouse-manipulation")
-  manual: ""
-  credit: qsTr("The chess engine is from gnuchess.")
-  section: "/strategy/chess"
+  prerequisite: ""
+  manual: qsTr("In this activity you discover the chess game by playing against the computer. It displays the possible target position for any selected piece which helps the children understand how pieces moves. At first level the computer is fully random to give the most chances to the children. As level increases, better the computer plays.")
+  credit: qsTr("The chess engine is p4wn &lt;https://github.com/douglasbagnall/p4wn&gt;.")
+  section: "strategy"
 }

@@ -1,6 +1,6 @@
 /* GCompris - ActivityInfo.qml
  *
- * Copyright (C) 2015 Your Name <yy@zz.org>
+ * Copyright (C) 2015 Bruno Coudoin <bruno.coudoin@gcompris.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,16 +18,17 @@
 import GCompris 1.0
 
 ActivityInfo {
-  name: "chess_computer/ChessComputer.qml"
-  difficulty: 2
-  icon: "chess_computer/chess_computer.svg"
+  name: "chess_2players/Chess2Players.qml"
+  difficulty: 6
+  icon: "chess_2players/chess_2players.svg"
   author: "Bruno Coudoin &lt;bruno.coudoin@gcompris.net&gt;"
   demo: false
-  title: qsTr("Learning chess")
-  description: qsTr("Play chess against the computer in a learning mode")
+  title: qsTr("Play chess against your friend")
+  description: ""
+  //intro: "play chess against your friend"
   goal: ""
-  prerequisite: qsTr("Mouse-manipulation")
-  manual: ""
-  credit: qsTr("The chess engine is from gnuchess.")
-  section: "/strategy/chess"
+  prerequisite: ""
+  manual: qsTr("In this activity you discover the chess game by playing against a friend. It displays the possible target position for any selected piece which helps the children understand how pieces moves.")
+  credit: ""
+  section: "strategy"
 }
