@@ -48,10 +48,10 @@ guessnumber
 hanoi
 hanoi_real
 hexagon
-imageid
 imagename
 instruments
 intro_gravity
+lang
 leftright
 lightsoff
 louis-braille
@@ -60,6 +60,7 @@ magic-hat-plus
 maze
 mazeinvisible
 mazerelative
+melody
 memory
 memory-enumerate
 memory-math-add

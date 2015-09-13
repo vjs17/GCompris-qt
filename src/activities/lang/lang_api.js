@@ -40,7 +40,7 @@ function load(parser, baseUrl, datasetFilename, translationFilename) {
         return;
     }
     dataset['contentText'] = loadContent(parser,
-       GCompris.ApplicationInfo.getLocaleFilePath(baseUrl + "/" + translationFilename))
+                                         GCompris.ApplicationInfo.getLocaleFilePath(baseUrl + "/" + translationFilename))
 
     if(!dataset['contentText']) {
         return null
@@ -70,8 +70,8 @@ function getChapterModel(dataset) {
     for (var c = 0; c < dataset.length; c++) {
         chapters.push(
                     {'name': dataset[c].name,
-                     'image': dataset[c].content[0].content[0].image,
-                     'index': c
+                        'image': dataset[c].content[0].content[0].image,
+                        'index': c
                     })
     }
     return chapters
@@ -98,12 +98,10 @@ function getLessonWords(dataset, lesson) {
     var allWords = []
     for (var k in wordList) {
         var word = wordList[k]
-
-        word['translatedTxt'] = dataset.contentText[word.voice.substr(word.voice.lastIndexOf("/")+1).replace("$CA", "ogg")];
-
+        word['translatedTxt'] = dataset.contentText[
+                    word.voice.substr(word.voice.lastIndexOf("/")+1).replace("$CA", "ogg")];
         if(word['translatedTxt'])
             allWords.push(word)
     }
-
     return allWords
 }
