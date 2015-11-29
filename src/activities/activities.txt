@@ -97,6 +97,7 @@ numbers-odd-even
 paintings
 penalty
 planegame
+playpiano
 readingh
 readingv
 redraw
