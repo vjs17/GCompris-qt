@@ -56,6 +56,7 @@ static const QString ENABLE_AUTOMATIC_DOWNLOADS = "enableAutomaticDownloads";
 static const QString DOWNLOAD_SERVER_URL_KEY = "downloadServerUrl";
 
 static const QString EXE_COUNT_KEY = "exeCount";
+static const QString LAST_GC_VERSION_RAN = "lastGCVersionRan";
 
 static const QString FILTER_LEVEL_MIN = "filterLevelMin";
 static const QString FILTER_LEVEL_MAX = "filterLevelMax";
@@ -128,6 +129,7 @@ ApplicationSettings::ApplicationSettings(QObject *parent): QObject(parent),
     // internal group
     m_config.beginGroup(INTERNAL_GROUP_KEY);
     m_exeCount = m_config.value(EXE_COUNT_KEY, 0).toUInt();
+    m_lastGCVersionRan = m_config.value(LAST_GC_VERSION_RAN, ApplicationInfo::getInstance()->GCVersionCode()).toUInt();
     m_config.endGroup();
 
     // no group
@@ -148,6 +150,7 @@ ApplicationSettings::ApplicationSettings(QObject *parent): QObject(parent),
     connect(this, SIGNAL(kioskModeChanged()), this, SLOT(notifyKioskModeChanged()));
     connect(this, SIGNAL(downloadServerUrlChanged()), this, SLOT(notifyDownloadServerUrlChanged()));
     connect(this, SIGNAL(exeCountChanged()), this, SLOT(notifyExeCountChanged()));
+    connect(this, SIGNAL(lastGCVersionRanChanged()), this, SLOT(notifyLastGCVersionRanChanged()));
     connect(this, SIGNAL(barHiddenChanged()), this, SLOT(notifyBarHiddenChanged()));
 }
 
@@ -183,6 +186,7 @@ ApplicationSettings::~ApplicationSettings()
     // internal group
     m_config.beginGroup(INTERNAL_GROUP_KEY);
     m_config.setValue(EXE_COUNT_KEY, m_exeCount);
+    m_config.setValue(LAST_GC_VERSION_RAN, m_lastGCVersionRan);
     m_config.endGroup();
 
     m_config.sync();
@@ -300,6 +304,12 @@ void ApplicationSettings::notifyExeCountChanged()
 {
     updateValueInConfig(INTERNAL_GROUP_KEY, EXE_COUNT_KEY, m_exeCount);
     qDebug() << "exeCount set to: " << m_exeCount;
+}
+
+void ApplicationSettings::notifyLastGCVersionRanChanged()
+{
+    updateValueInConfig(INTERNAL_GROUP_KEY, LAST_GC_VERSION_RAN, m_lastGCVersionRan);
+    qDebug() << "lastVersionRan set to: " << m_lastGCVersionRan;
 }
 
 void ApplicationSettings::notifyBarHiddenChanged()

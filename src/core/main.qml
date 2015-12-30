@@ -107,6 +107,10 @@ Window {
         audioVoices.append(ApplicationInfo.getAudioFilePath("voices-$CA/$LOCALE/intro/" + name + ".$CA"))
     }
 
+    ChangeLog {
+       id: changelog
+    }
+
     Component.onCompleted: {
         console.log("enter main.qml (run #" + ApplicationSettings.exeCount
                     + ", ratio=" + ApplicationInfo.ratio
@@ -139,6 +143,21 @@ Window {
                         qsTr("No"), null,
                         function() { pageView.currentItem.focus = true }
             );
+        }
+        else {
+            if(changelog.isNewerVersion(ApplicationSettings.lastGCVersionRan, ApplicationInfo.GCVersionCode)) {
+                // display log between ApplicationSettings.lastGCVersionRan and ApplicationInfo.GCVersionCode
+                var dialog;
+                dialog = Core.showMessageDialog(
+                main,
+                qsTr("GCompris has been updated!<br/>") + changelog.getLogBetween(ApplicationSettings.lastGCVersionRan, ApplicationInfo.GCVersionCode),
+                "", null,
+                "", null,
+                function() { pageView.currentItem.focus = true }
+                );
+                // Store new version
+                ApplicationSettings.lastGCVersionRan = ApplicationInfo.GCVersionCode;
+            }
         }
     }
 
