@@ -153,6 +153,11 @@ class ApplicationSettings : public QObject
     Q_PROPERTY(bool sectionVisible READ sectionVisible WRITE setSectionVisible NOTIFY sectionVisibleChanged)
 
     /**
+     * The name of the default wordset to use. If empty then the internal sample wordset is used.
+     */
+    Q_PROPERTY(QString wordset READ wordset WRITE setWordset NOTIFY wordsetChanged)
+
+    /**
      * Current base font-size used for font scaling.
      *
      * This setting is the basis for application-wide font-scaling. A value
@@ -303,14 +308,20 @@ public:
         }
 	}
 
-	bool sectionVisible() const { return m_sectionVisible; }
-	void setSectionVisible(const bool newMode) {
+    bool sectionVisible() const { return m_sectionVisible; }
+    void setSectionVisible(const bool newMode) {
 		qDebug() << "c++ setSectionVisible=" << newMode;
 		m_sectionVisible = newMode;
 		emit sectionVisibleChanged();
 	}
 
-	QString downloadServerUrl() const { return m_downloadServerUrl; }
+    QString wordset() const { return m_wordset; }
+    void setWordset(const QString newWordset) {
+        m_wordset = newWordset;
+        emit wordsetChanged();
+    }
+
+    QString downloadServerUrl() const { return m_downloadServerUrl; }
     void setDownloadServerUrl(const QString newDownloadServerUrl) {
         m_downloadServerUrl = newDownloadServerUrl;
         emit downloadServerUrlChanged();
@@ -354,6 +365,7 @@ protected slots:
     Q_INVOKABLE void notifyDemoModeChanged();
     Q_INVOKABLE void notifyKioskModeChanged();
     Q_INVOKABLE void notifySectionVisibleChanged();
+    Q_INVOKABLE void notifyWordsetChanged();
 
     Q_INVOKABLE void notifyDownloadServerUrlChanged();
 
@@ -415,6 +427,7 @@ signals:
     void demoModeChanged();
     void kioskModeChanged();
     void sectionVisibleChanged();
+    void wordsetChanged();
     void baseFontSizeChanged();
 
     void downloadServerUrlChanged();
@@ -448,6 +461,7 @@ private:
     bool m_isDemoMode;
     bool m_isKioskMode;
     bool m_sectionVisible;
+    QString m_wordset;
 	int m_baseFontSize;
 	const int m_baseFontSizeMin;
 	const int m_baseFontSizeMax;

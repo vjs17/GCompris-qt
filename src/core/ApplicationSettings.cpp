@@ -1,4 +1,4 @@
-/* GCompris - ApplicationSettingsDefault.cpp
+/* GCompris - ApplicationSettingswordefault.cpp
  *
  * Copyright (C) 2014 Johnny Jazeix <jazeix@gmail.com>
  *
@@ -68,6 +68,7 @@ static const QString NO_CURSOR = "noCursor";
 static const QString DEMO_KEY = "demo";
 static const QString KIOSK_KEY = "kiosk";
 static const QString SECTION_VISIBLE = "sectionVisible";
+static const QString WORDSET = "wordset";
 
 static const QString PROGRESS_KEY = "progress";
 
@@ -108,8 +109,9 @@ ApplicationSettings::ApplicationSettings(QObject *parent): QObject(parent),
     // Option only useful if we are in demo mode (else all the activities are available and unlocked)
     // By default, all the activities are displayed (even locked ones)
     m_showLockedActivities = m_config.value(SHOW_LOCKED_ACTIVITIES_KEY, m_isDemoMode).toBool();
-	m_sectionVisible = m_config.value(SECTION_VISIBLE, true).toBool();
-	m_isAutomaticDownloadsEnabled = m_config.value(ENABLE_AUTOMATIC_DOWNLOADS,
+    m_sectionVisible = m_config.value(SECTION_VISIBLE, true).toBool();
+    m_wordset = m_config.value(WORDSET, "").toString();
+    m_isAutomaticDownloadsEnabled = m_config.value(ENABLE_AUTOMATIC_DOWNLOADS,
             !ApplicationInfo::getInstance()->isMobile() && ApplicationInfo::isDownloadAllowed()).toBool();
     m_filterLevelMin = m_config.value(FILTER_LEVEL_MIN, 1).toUInt();
     m_filterLevelMax = m_config.value(FILTER_LEVEL_MAX, 6).toUInt();
@@ -143,7 +145,8 @@ ApplicationSettings::ApplicationSettings(QObject *parent): QObject(parent),
     connect(this, SIGNAL(automaticDownloadsEnabledChanged()), this, SLOT(notifyAutomaticDownloadsEnabledChanged()));
     connect(this, SIGNAL(filterLevelMinChanged()), this, SLOT(notifyFilterLevelMinChanged()));
     connect(this, SIGNAL(filterLevelMaxChanged()), this, SLOT(notifyFilterLevelMaxChanged()));
-	connect(this, SIGNAL(sectionVisibleChanged()), this, SLOT(notifySectionVisibleChanged()));
+    connect(this, SIGNAL(sectionVisibleChanged()), this, SLOT(notifySectionVisibleChanged()));
+    connect(this, SIGNAL(wordsetChanged()), this, SLOT(notifyWordsetChanged()));
     connect(this, SIGNAL(demoModeChanged()), this, SLOT(notifyDemoModeChanged()));
     connect(this, SIGNAL(kioskModeChanged()), this, SLOT(notifyKioskModeChanged()));
     connect(this, SIGNAL(downloadServerUrlChanged()), this, SLOT(notifyDownloadServerUrlChanged()));
@@ -169,7 +172,8 @@ ApplicationSettings::~ApplicationSettings()
     m_config.setValue(DEMO_KEY, m_isDemoMode);
     m_config.setValue(KIOSK_KEY, m_isKioskMode);
     m_config.setValue(SECTION_VISIBLE, m_sectionVisible);
-	m_config.setValue(DEFAULT_CURSOR, m_defaultCursor);
+    m_config.setValue(WORDSET, m_wordset);
+    m_config.setValue(DEFAULT_CURSOR, m_defaultCursor);
 	m_config.setValue(NO_CURSOR, m_noCursor);
     m_config.setValue(BASE_FONT_SIZE_KEY, m_baseFontSize);
     m_config.setValue(FONT_CAPITALIZATION, m_fontCapitalization);
@@ -286,8 +290,14 @@ void ApplicationSettings::notifyKioskModeChanged()
 
 void ApplicationSettings::notifySectionVisibleChanged()
 {
-	updateValueInConfig(GENERAL_GROUP_KEY, SECTION_VISIBLE, m_sectionVisible);
-	qDebug() << "notifySectionVisible: " << m_sectionVisible;
+    updateValueInConfig(GENERAL_GROUP_KEY, SECTION_VISIBLE, m_sectionVisible);
+    qDebug() << "notifySectionVisible: " << m_sectionVisible;
+}
+
+void ApplicationSettings::notifyWordsetChanged()
+{
+    updateValueInConfig(GENERAL_GROUP_KEY, WORDSET, m_wordset);
+    qDebug() << "notifyWordset: " << m_wordset;
 }
 
 void ApplicationSettings::notifyDownloadServerUrlChanged()
